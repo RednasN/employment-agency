@@ -1,0 +1,21 @@
+<h2>Overzicht</h2>
+
+<div class="form-check" (change)="onOnlyWithVacanciesChanged($event)">
+    <input class="form-check-input" type="checkbox" value="" id="onlyWithVacancies">
+    <label class="form-check-label" for="onlyWithVacancies">
+      Toon alleen bedrijven met vacatures
+    </label>
+</div>
+
+<div *ngFor="let company of companies | overviewFilter: filterCompaniesWithVacancies" class="card mb-2">
+    <div class="card-header">
+        {{company.name}} | {{company.address}}
+    </div>
+    <div *ngFor="let vacancy of company.vacancies" class="card-body">
+      <h5 class="card-title">{{vacancy.title}}</h5>
+      <p class="card-text">{{vacancy.description}}</p>
+    </div>
+    <div *ngIf="!hasVacancies(company)" class="card-body">
+        <small class="text-muted">Er zijn geen vacatures gevonden.</small>
+    </div>
+</div>
