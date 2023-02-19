@@ -13,8 +13,8 @@ namespace Jex.Application.Vacancies.Commands.DeleteVacancy
 
     public class DeleteVacancyCommandHandler : IRequestHandler<DeleteVacancyCommand>
     {
-        private readonly ICompanyRepository _vacancyRepository;
-        public DeleteVacancyCommandHandler(ICompanyRepository vacancyRepository)
+        private readonly IVacancyRepository _vacancyRepository;
+        public DeleteVacancyCommandHandler(IVacancyRepository vacancyRepository)
         {
             _vacancyRepository = vacancyRepository;
         }

@@ -8,9 +8,9 @@ import { FormService } from 'src/app/common/services/form.service';
 
 @Component({
   selector: 'app-create-vacancy',
-  templateUrl: './create-vacancy.component.html',
-  styleUrls: ['./create-vacancy.component.scss']
+  templateUrl: './create-vacancy.component.html'
 })
+
 export class CreateVacancyComponent implements OnInit {
 
   public isSuccess = false;
@@ -45,7 +45,7 @@ export class CreateVacancyComponent implements OnInit {
     this.dropDownField
   ];
 
-  get controls() {
+  public get controls() {
     return this.form.controls;
   }
 
@@ -54,7 +54,7 @@ export class CreateVacancyComponent implements OnInit {
     private readonly vacancyService: VacancyService,
     private readonly formService: FormService) { }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.companyService.companyGet().subscribe(result => {
 
       const items = result.map(x => {
@@ -77,7 +77,7 @@ export class CreateVacancyComponent implements OnInit {
       const vacancy = this.form.value as CreateVacancyCommand;
       this.vacancyService.vacancyPost(vacancy).subscribe({
         next: () => { this.isSuccess = true },
-        error: () => { this.isSuccess = false }
+        error: () => { this.isError = true }
       });
     }
   }

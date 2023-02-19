@@ -3,8 +3,7 @@ import { CompanyDto, CompanyService } from 'src/app/common/api';
 
 @Component({
   selector: 'app-company-list',
-  templateUrl: './company-list.component.html',
-  styleUrls: ['./company-list.component.scss']
+  templateUrl: './company-list.component.html'
 })
 export class CompanyListComponent implements OnInit {
 
@@ -12,7 +11,7 @@ export class CompanyListComponent implements OnInit {
   
   private filterCompaniesWithVacanciesActive = false;
 
-  constructor(private readonly companyService: CompanyService) {}
+  public constructor(private readonly companyService: CompanyService) {}
 
   public ngOnInit(): void {
     this.companyService.companyGet(true).subscribe(result => {
