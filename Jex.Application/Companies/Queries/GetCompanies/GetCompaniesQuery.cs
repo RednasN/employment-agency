@@ -25,8 +25,8 @@ namespace Jex.Application.Companies.Queries.GetCompanies
         }
 
         public async Task<IEnumerable<CompanyDto>> Handle(GetCompaniesQuery request, CancellationToken cancellationToken)
-        {            
-            var companies = request.IncludeVacancies ? await _companyRepository.GetCompaniesWithVacancies() : 
+        {
+            var companies = request.IncludeVacancies ? await _companyRepository.GetCompaniesWithVacancies() :
                                                         await _companyRepository.Get();
 
             var companyDtos = _mapper.Map<IEnumerable<CompanyDto>>(companies);

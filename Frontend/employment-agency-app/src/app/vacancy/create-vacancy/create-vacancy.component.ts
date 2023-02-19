@@ -18,6 +18,15 @@ export class CreateVacancyComponent implements OnInit {
 
   public form: FormGroup = new FormGroup({});
 
+  private dropDownField = new FormDropDown({
+    key: 'companyId',
+    label: 'Bedrijf',
+    required: true,
+    type: "dropdown",
+    options: [],
+    order: 1
+  });
+
   public formFields: FormInputBase<string | boolean>[] = [
     new FormTextBox({
       key: 'title',
@@ -32,13 +41,18 @@ export class CreateVacancyComponent implements OnInit {
       label: 'Omschrijving',
       required: true,
       order: 3
-    })
+    }),
+    this.dropDownField
   ];
 
+  get controls() {
+    return this.form.controls;
+  }
+
   constructor(
-    private companyService: CompanyService,
-    private vacancyService: VacancyService,
-    private formService: FormService) { }
+    private readonly companyService: CompanyService,
+    private readonly vacancyService: VacancyService,
+    private readonly formService: FormService) { }
 
   ngOnInit(): void {
     this.companyService.companyGet().subscribe(result => {
@@ -48,22 +62,11 @@ export class CreateVacancyComponent implements OnInit {
         return dropdownItem;
       });
 
-      this.formFields.push(new FormDropDown({
-        key: 'companyId',
-        label: 'Bedrijf',
-        required: true,
-        type: "dropdown",
-        options: items,
-        order: 1
-      }));
+      this.dropDownField.options = items;
 
       this.form = this.formService.createFormGroup(this.formFields);
     })
-  }
-
-  get controls() {
-    return this.form.controls;
-  }
+  }  
 
   public onSubmit() {
     this.form.markAllAsTouched();

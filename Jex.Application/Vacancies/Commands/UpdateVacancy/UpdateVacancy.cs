@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Jex.Application.Contracts.Persistence;
+using Jex.Application.Exceptions;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -31,12 +32,14 @@ namespace Jex.Application.Vacancy.Commands.UpdateVacancy
         {
             var vacancy = await _vacancyRepository.GetById(request.Id);
 
-            if(vacancy != null)
+            if (vacancy == null)
             {
-                vacancy.Title = request.Title;
-                vacancy.Description = request.Description;
-                await _vacancyRepository.Update(vacancy);
+                throw new ContentValidationException(nameof(request.Id), $"Vacancy with id {request.Id} does not exist");
             }
+
+            vacancy.Title = request.Title;
+            vacancy.Description = request.Description;
+            await _vacancyRepository.Update(vacancy);
         }
     }
 }

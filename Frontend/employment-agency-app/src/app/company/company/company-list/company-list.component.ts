@@ -9,6 +9,7 @@ import { CompanyDto, CompanyService } from 'src/app/common/api';
 export class CompanyListComponent implements OnInit {
 
   public companies: CompanyDto[] = [];
+  
   private filterCompaniesWithVacanciesActive = false;
 
   constructor(private readonly companyService: CompanyService) {}
@@ -23,8 +24,9 @@ export class CompanyListComponent implements OnInit {
       return company.vacancies.length > 0;
   }
 
-  public onOnlyWithVacanciesChanged(event: any ) {
-    this.filterCompaniesWithVacanciesActive = event.target.checked;
+  public onOnlyWithVacanciesChanged(event: Event ) {
+    
+    this.filterCompaniesWithVacanciesActive = (event.target as HTMLInputElement).checked;
   }
 
   public filterCompaniesWithVacancies = (company: CompanyDto): boolean => !this.filterCompaniesWithVacanciesActive || company.vacancies.length > 0;

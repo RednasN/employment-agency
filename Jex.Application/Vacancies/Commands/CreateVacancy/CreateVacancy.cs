@@ -1,5 +1,6 @@
 ﻿using Jex.Application.Companies.Models;
 using Jex.Application.Contracts.Persistence;
+using Jex.Application.Exceptions;
 using Jex.Domain.Entities;
 using MediatR;
 using System;
@@ -35,6 +36,11 @@ namespace Jex.Application.Vacancies.Commands.CreateVacancy
         public async Task Handle(CreateVacancyCommand request, CancellationToken cancellationToken)
         {
             var company = await _companyRepository.GetById(request.CompanyId);
+
+            if (company == null)
+            {
+                throw new ContentValidationException(nameof(request.CompanyId), $"Company with id {request.CompanyId} does not exist");
+            }
 
             var vacancy = new Domain.Entities.Vacancy
             {

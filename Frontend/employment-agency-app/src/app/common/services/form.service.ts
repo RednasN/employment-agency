@@ -8,7 +8,7 @@ import { FormInputBase } from "../models/form-input-base";
 export class FormService {
 
     public createFormGroup(fields: FormInputBase<string | boolean>[]): FormGroup {
-        const group: any = {};
+        const group: Record<string, FormControl> = {};
         fields.sort((a, b) => a.order - b.order).forEach(field => {
             group[field.key] = field.required ? new FormControl(field.value || '', Validators.required)
                 : new FormControl(field.value || '');

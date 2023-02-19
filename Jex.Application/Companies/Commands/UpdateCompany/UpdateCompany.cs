@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Jex.Application.Contracts.Persistence;
+using Jex.Application.Exceptions;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -31,12 +32,14 @@ namespace Jex.Application.Companies.Commands.UpdateCompany
         {
             var company = await _companyRepository.GetById(request.Id);
 
-            if(company != null)
+            if(company == null)
             {
-                company.Address = request.Address;
-                company.Name = request.Name;
-                await _companyRepository.Update(company);
+                throw new ContentValidationException(nameof(request.Id), $"Company with id {request.Id} does not exist");
             }
+
+            company.Address = request.Address;
+            company.Name = request.Name;
+            await _companyRepository.Update(company);
         }
     }
 }

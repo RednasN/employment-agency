@@ -1,4 +1,5 @@
 ﻿using Jex.Application.Contracts.Persistence;
+using Jex.Application.Exceptions;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 namespace Jex.Application.Companies.Commands.DeleteCompany
 {
     public record DeleteCompanyCommand(int Id) : IRequest;
-    
+
     public class DeleteCompanyCommandHandler : IRequestHandler<DeleteCompanyCommand>
     {
         private readonly ICompanyRepository _companyRepository;
@@ -22,10 +23,12 @@ namespace Jex.Application.Companies.Commands.DeleteCompany
         {
             var company = await _companyRepository.GetById(request.Id);
 
-            if(company != null)
+            if (company == null)
             {
-                await _companyRepository.Delete(company);
+                throw new ContentValidationException(nameof(request.Id), $"Company with id {request.Id} does not exist");
             }
+
+            await _companyRepository.Delete(company);
         }
     }
 }

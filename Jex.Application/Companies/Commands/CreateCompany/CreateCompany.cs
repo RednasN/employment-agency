@@ -32,7 +32,7 @@ namespace Jex.Application.Companies.Commands.CreateCompany
             var company = new Company
             {
                 Name = request.Name,
-                Address = request.Address                              
+                Address = request.Address
             };
 
             await _companyRepository.Add(company);

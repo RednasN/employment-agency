@@ -50,6 +50,7 @@ namespace Jex.Api.Controllers
 
         [HttpDelete]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> Delete([FromQuery] DeleteCompanyCommand command)
         {
             await _mediator.Send(command);

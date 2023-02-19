@@ -32,7 +32,7 @@ namespace Jex.Infrastructure.Persistence
 
         public async Task<List<T>> Get(Expression<Func<T, bool>>? filter = null, Func<IQueryable<T>, IIncludableQueryable<T, object>> includes = null)
         {
-            IQueryable<T> query = _jexDbContext.Set<T>();            
+            IQueryable<T> query = _jexDbContext.Set<T>();
 
             if (filter != null)
             {

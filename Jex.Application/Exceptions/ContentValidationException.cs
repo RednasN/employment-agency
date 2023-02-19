@@ -15,6 +15,13 @@ namespace Jex.Application.Exceptions
             Errors = new Dictionary<string, string[]>();
         }
 
+        public ContentValidationException(string property, string errorMessage)
+        {
+            Errors = new Dictionary<string, string[]> {
+                { property, new[] { errorMessage }}
+            };
+        }
+
         public ContentValidationException(IEnumerable<ValidationFailure> failures)
             : this()
         {

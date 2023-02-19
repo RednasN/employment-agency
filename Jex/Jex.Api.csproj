@@ -19,8 +19,4 @@
     <ProjectReference Include="..\Jex.Infrastructure\Jex.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Middleware\" />
-  </ItemGroup>
-
 </Project>

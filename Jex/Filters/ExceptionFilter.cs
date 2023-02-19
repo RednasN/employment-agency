@@ -19,7 +19,7 @@ namespace Jex.Api.Filters
 
             var details = new ValidationProblemDetails(ex.Errors);
             context.Result = new BadRequestObjectResult(details);
-            context.ExceptionHandled = true;        
+            context.ExceptionHandled = true;
         }
     }
 }

@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from "@angular/core";
     pure: false
 })
 export class OverviewFilterPipe implements PipeTransform {
-    transform(items: any[], callback: (item: any) => boolean): any {
+    transform(items: any[], callback: (item: any) => boolean): any { // eslint-disable-line @typescript-eslint/no-explicit-any
         if (!items || !callback) {
             return items;
         }

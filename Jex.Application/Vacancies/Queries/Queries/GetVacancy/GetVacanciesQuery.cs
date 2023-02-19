@@ -25,7 +25,7 @@ namespace Jex.Application.Vacancy.Queries.GetVacancy
         }
 
         public async Task<IEnumerable<VacancyDto>> Handle(GetVacanciesQuery request, CancellationToken cancellationToken)
-        {            
+        {
             var vacancies = await _vacancyRepository.Get();
             var vacancyDtos = _mapper.Map<IEnumerable<VacancyDto>>(vacancies);
             return vacancyDtos;
