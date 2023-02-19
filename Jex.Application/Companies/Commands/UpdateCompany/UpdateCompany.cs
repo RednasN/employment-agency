@@ -3,6 +3,7 @@ using Jex.Application.Contracts.Persistence;
 using MediatR;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +13,9 @@ namespace Jex.Application.Companies.Commands.UpdateCompany
     public record UpdateCompanyCommand : IRequest
     {
         public int Id { get; set; }
+        [Required(AllowEmptyStrings = false)]
         public string Name { get; init; }
+        [Required(AllowEmptyStrings = false)]
         public string Address { get; init; }
     }
 

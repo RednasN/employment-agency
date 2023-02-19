@@ -4,6 +4,7 @@ using Jex.Domain.Entities;
 using MediatR;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +13,9 @@ namespace Jex.Application.Companies.Commands.CreateCompany
 {
     public record CreateCompanyCommand : IRequest
     {
+        [Required(AllowEmptyStrings = false)]
         public string Name { get; init; }
+        [Required(AllowEmptyStrings = false)]
         public string Address { get; init; }
     }
 

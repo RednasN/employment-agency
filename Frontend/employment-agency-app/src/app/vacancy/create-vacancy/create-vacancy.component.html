@@ -1,0 +1,22 @@
+<div class="container">
+    <h2>Vacature aanmaken</h2>
+    <div class="row">
+        <div class="col-6">
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                <app-form-input *ngFor="let field of formFields" [field]="field" [form]="form"></app-form-input>
+                
+                <hr>
+                
+                <button type="submit" class="btn btn-primary">Toevoegen</button>
+                <hr>
+
+                <div *ngIf="isSuccess" class="alert alert-success" role="alert">
+                    Vacature succesvol toegevoegd.
+                </div>
+                <div *ngIf="isError" class="alert alert-danger" role="alert">
+                    Er is iets fout gegaan tijdens het plaatsen van de vacature.
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,16 @@
+<section *ngIf="form.controls[field.key]" [formGroup]='form'>
+    <div class="form-group" [ngSwitch]='field.controlType'>
+        <label [attr.for]='field.key' class="col-form-label">{{ field.label }}</label>
+
+        <input *ngSwitchCase="'textbox'" class="form-control" [formControlName]='field.key' [id]='field.key'
+            [type]='field.type'>
+
+        <select *ngSwitchCase="'dropdown'" class="form-control" [id]='field.key' [formControlName]='field.key'>
+            <option *ngFor='let opt of field.options' [value]='opt.key'>{{ opt.value }}</option>
+        </select>
+    </div>
+
+    <span class="text-danger" *ngIf="!isValid">
+        Dit veld is vereist.
+    </span>
+</section>

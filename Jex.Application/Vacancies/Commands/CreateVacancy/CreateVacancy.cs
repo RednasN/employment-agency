@@ -4,6 +4,7 @@ using Jex.Domain.Entities;
 using MediatR;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +13,10 @@ namespace Jex.Application.Vacancies.Commands.CreateVacancy
 {
     public record CreateVacancyCommand : IRequest
     {
+        [Required(AllowEmptyStrings = false)]
         public string Title { get; init; }
+
+        [Required(AllowEmptyStrings = false)]
         public string Description { get; init; }
         public int CompanyId { get; init; }
     }
